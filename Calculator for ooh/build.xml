@@ -1,14 +1,20 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <!-- WARNING: Eclipse auto-generated file.
               Any modifications will be overwritten.
               To include a user specific buildfile here, simply create one in the same
               directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="Calculator for ohh">
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="build" name="Calculator for ohh" xmlns:jacoco="antlib:org.jacoco.ant">
     <property environment="env"/>
     <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.7"/>
     <property name="source" value="1.7"/>
+	
+	<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+		<classpath path="lib/jacocoant.jar"/>
+	</taskdef>
+	
     <path id="Calculator for ohh.classpath">
 		<fileset dir="bin">
 			<include name="*.class" />
@@ -41,11 +47,14 @@
 
     <target name="UnitTest">
         <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="calc.UnitTest" todir="${junit.output.dir}"/>
-            <classpath refid="Calculator for ohh.classpath"/>
-        </junit>
+		<mkdir dir="${junit.output.dir}/jacoco"/>
+		<jacoco:coverage destfile="${junit.output.dir}/jacoco/jacoco.exec">
+			<junit fork="yes" printsummary="withOutAndErr">
+				<formatter type="xml"/>
+				<test name="calc.UnitTest" todir="${junit.output.dir}"/>
+				<classpath refid="Calculator for ohh.classpath"/>
+			</junit>
+		</jacoco:coverage>
     </target>
     <target name="junitreport">
         <junitreport todir="${junit.output.dir}">
