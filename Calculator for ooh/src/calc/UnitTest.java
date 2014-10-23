@@ -28,5 +28,6 @@ public class UnitTest {
 	@Test
 	public void absTest(){
 		Assert.assertEquals(1,calculator.abs(-1).intValue());
+		Assert.assertEquals(1,calculator.abs(1).intValue());
 	}
 }
