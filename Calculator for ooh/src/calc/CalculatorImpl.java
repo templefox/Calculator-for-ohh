@@ -19,7 +19,7 @@ public class CalculatorImpl implements Calculator {
 		}else if(a==0){
 			System.out.println("It is zero");
 		}else {
-			a=a;
+			a=-a;
 		}
 		return a;
 	}	
